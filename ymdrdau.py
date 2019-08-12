@@ -2,11 +2,14 @@
 # -*- coding: utf-8 -*-
 
 from configparser import ConfigParser
-import time, logging, logging.handlers, json, requests
+import time, logging, logging.handlers, json, requests, subprocess, urllib3
 import multiprocessing, random, string, uuid, base64, hashlib, zlib
 from Crypto.Cipher import AES
 from time import sleep
+from iscpy.iscpy_dns.named_importer_lib import *
 import sys, daemon
+
+urllib3.disable_warnings()
 
 conf = {}
 
@@ -22,14 +25,21 @@ try:
 	log = {}
 	log['path'] = config.get('log', 'path')
 	conf['log'] = log
+
+	named = {}
+	named['dnstap_file'] = config.get('named', 'dnstap_file')
+	named['local_root'] = config.get('named', 'local_root')
+	conf['named'] = named
 	
 	upload = {}
 	upload['ip'] = config.get('upload', 'ip')
 	upload['port'] = config.get('upload', 'port')
+	upload['delay'] = config.getint('upload', 'delay')
 	conf['upload'] = upload
 
 	server = {}
-	server['orgid'] = config.get('server', 'orgid')
+	server['org_id'] = config.get('server', 'org_id')
+	server['area_id'] = config.get('server', 'area_id')
 	conf['server'] = server
 
 	security = {}
@@ -51,6 +61,8 @@ try:
 	formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 	handler.setFormatter(formatter)
 	logger.addHandler(handler)
+
+	share_delay = multiprocessing.Value('d', conf['upload']['delay'])
 
 except Exception as e:
 	print('load conf error:',e)
@@ -80,8 +92,244 @@ class AESCipher:
 		return self.__unpad(cipher.decrypt(enc))#.decode("utf-8"))
 
 
+def get_root_copy_list():
+	root_local_file = conf['named']['local_root']
+	try:
+		with open(root_local_file, 'r') as f:
+			data = f.read()
+			named_data = MakeNamedDict(data)
+			servers = named_data['orphan_zones']['.']['options']['server-addresses']
+			root_copy_list = []
+			for k in servers:
+				root_copy_list.append(k)
+			return root_copy_list
+				
+	except Exception as e:
+		logger.error('get root copy list error:'+str(e))
+	return []
+
+
 def get_recursion_iter_data():
-	return 'test_data'
+	dnstap_file = conf['named']['dnstap_file']
+	target_file = '/tmp/root_zone.txt'
+	root_copy_list = get_root_copy_list()
+	root_ip_list = [
+		'202.12.27.33',
+		'2001:dc3::35',
+		'199.9.14.201',
+		'2001:500:200::b',
+		'192.33.4.12',
+		'2001:500:2::c',
+		'199.7.91.13',
+		'2001:500:2d::d',
+		'192.203.230.10',
+		'2001:500:a8::e',
+		'192.5.5.241',
+		'2001:500:2f::f',
+		'192.112.36.4',
+		'2001:500:12::d0d',
+		'198.97.190.53',
+		'2001:500:1::53',
+		'198.41.0.4',
+		'2001:503:ba3e::2:30',
+		'192.36.148.17',
+		'2001:7fe::53',
+		'192.58.128.30',
+		'2001:503:c27::2:30',
+		'193.0.14.129',
+		'2001:7fd::1',
+		'199.7.83.42',
+		'2001:500:9f::42'
+	] + root_copy_list 
+
+	root_list = {
+		'm': ['202.12.27.33','2001:dc3::35'],
+		'b': ['199.9.14.201','2001:500:200::b'],
+		'c': ['192.33.4.12','2001:500:2::c'],
+		'd': ['199.7.91.13','2001:500:2d::d'],
+		'e': ['192.203.230.10','2001:500:a8::e'],
+		'f': ['192.5.5.241','2001:500:2f::f'],
+		'g': ['192.112.36.4','2001:500:12::d0d'],
+		'h': ['198.97.190.53','2001:500:1::53'],
+		'a': ['198.41.0.4','2001:503:ba3e::2:30'],
+		'i': ['192.36.148.17','2001:7fe::53'],
+		'j': ['192.58.128.30','2001:503:c27::2:30'],
+		'k': ['193.0.14.129','2001:7fd::1'],
+		'l': ['199.7.83.42','2001:500:9f::42'],
+		'root_copy': root_copy_list
+	}
+
+	root_request_stat = {'a':0, 'b':0, 'c':0, 'd':0, 'e':0, 'f':0, 'g':0, 'h':0, 'i':0, 'j':0, 'k':0, 'l':0, 'm':0, 'root_copy':0}
+	delay_stat = root_request_stat.copy()
+	root_reaponse_stat = root_request_stat.copy()
+
+	try:
+		with open(target_file,'w') as f:
+			subprocess.check_call(['dnstap-read',dnstap_file],stdout=f, cwd = '.')
+	except Exception as e:
+		logger.error('get recursion stat dnstap-read error:'+str(e))
+		return '' 
+
+	root_request,root_response = {},{}
+
+	try:
+		with open(target_file,'r') as f:
+			for s in f:
+				l = s.split(' ')
+				if l[5].split(':')[-1] == '53':
+				#after add root 13 delay stat
+					if '->' in l:
+						domain = l[5].split(':53')[0]
+						if domain in root_ip_list:
+							if domain in root_request:
+								root_request[domain] += 1
+							else:
+								root_request[domain] = 1
+					elif '<-' in l:
+						domain = l[5].split(':53')[0]
+						if domain in root_ip_list:
+							if domain in root_response:
+								root_response[domain] += 1
+							else:
+								root_response[domain] = 1
+
+		for k in root_list:
+			for ip in root_list[k]:
+				if ip in root_request:
+					root_request_stat[k] += root_request[ip]
+				if ip in root_response:
+					root_response_stat[k] += root_response[ip]
+				
+		dns_query = dns.message.make_query('.', 'NS')
+		for k in root_list:
+			#if root_stat[k] > 0 and len(root_list[k]) > 0: 
+			if True:
+				try:
+					begin = datetime.datetime.now()
+					response = dns.query.udp(dns_query, root_list[k][0], port = 53,timeout = 2)
+					end = datetime.datetime.now()
+					delay_stat[k] = (end - begin).microseconds//1000
+				except Exception as e:
+					logger.warning(k+' get root delay error:'+str(e))
+		
+		iter_data = {
+			'nodeId': '03211101',
+			'rootList':[		
+				{
+					'ns':'a.root-servers.net',
+					'queryCnt':str(root_request_stat['a']),
+					'sucRespCnt':str(root_response_stat['a']),
+					'resolveAvgT':str(delay_stat['a'])
+				},
+				{
+					'ns':'b.root-servers.net',
+					'queryCnt':str(root_request_stat['b']),
+					'sucRespCnt':str(root_response_stat['b']),
+					'resolveAvgT':str(delay_stat['d'])
+				},
+				{
+					'ns':'c.root-servers.net',
+					'queryCnt':str(root_request_stat['c']),
+					'sucRespCnt':str(root_response_stat['c']),
+					'resolveAvgT':str(delay_stat['c'])
+				},
+				{
+					'ns':'d.root-servers.net',
+					'queryCnt':str(root_request_stat['d']),
+					'sucRespCnt':str(root_response_stat['d']),
+					'resolveAvgT':str(delay_stat['d'])
+				},
+				{
+					'ns':'e.root-servers.net',
+					'queryCnt':str(root_request_stat['e']),
+					'sucRespCnt':str(root_response_stat['e']),
+					'resolveAvgT':str(delay_stat['e'])
+				},
+				{
+					'ns':'f.root-servers.net',
+					'queryCnt':str(root_request_stat['f']),
+					'sucRespCnt':str(root_response_stat['f']),
+					'resolveAvgT':str(delay_stat['f'])
+				},
+				{
+					'ns':'g.root-servers.net',
+					'queryCnt':str(root_request_stat['g']),
+					'sucRespCnt':str(root_response_stat['g']),
+					'resolveAvgT':str(delay_stat['g'])
+				},
+				{
+					'ns':'h.root-servers.net',
+					'queryCnt':str(root_request_stat['h']),
+					'sucRespCnt':str(root_response_stat['h']),
+					'resolveAvgT':str(delay_stat['h'])
+				},
+				{
+					'ns':'i.root-servers.net',
+					'queryCnt':str(root_request_stat['i']),
+					'sucRespCnt':str(root_response_stat['i']),
+					'resolveAvgT':str(delay_stat['i'])
+				},
+				{
+					'ns':'j.root-servers.net',
+					'queryCnt':str(root_request_stat['j']),
+					'sucRespCnt':str(root_response_stat['j']),
+					'resolveAvgT':str(delay_stat['j'])
+				},
+				{
+					'ns':'k.root-servers.net',
+					'queryCnt':str(root_request_stat['k']),
+					'sucRespCnt':str(root_response_stat['k']),
+					'resolveAvgT':str(delay_stat['k'])
+				},
+				{
+					'ns':'l.root-servers.net',
+					'queryCnt':str(root_request_stat['l']),
+					'sucRespCnt':str(root_response_stat['l']),
+					'resolveAvgT':str(delay_stat['l'])
+				},
+				{
+					'ns':'m.root-servers.net',
+					'queryCnt':str(root_request_stat['m']),
+					'sucRespCnt':str(root_response_stat['m']),
+					'resolveAvgT':str(delay_stat['m'])
+				}
+			],
+			'rcopyRCnt':str(root_response_stat['root_copy']),
+			'rcopyRAvgT':str(delay_stat['root_copy']),
+			'tldList':[
+				{
+					'tldName':'com',
+					'queryCnt':'123',
+					'sucRespCnt':'122',
+					'resolveAvgT':'66'
+				},
+				{
+					'tldName':'net',
+					'queryCnt':'123',
+					'sucRespCnt':'122',
+					'resolveAvgT':'66'
+				},
+				{
+					'tldName':'org',
+					'queryCnt':'123',
+					'sucRespCnt':'122',
+					'resolveAvgT':'66'
+				},
+				{
+					'tldName':'cn',
+					'queryCnt':'123',
+					'sucRespCnt':'122',
+					'resolveAvgT':'66'
+				}
+			],
+			'statPeriod':'300',
+			'timeStamp':time.strftime('%Y-%m-%dT%H:%M:%SZ')
+		}
+
+	except Exception as e:
+		logger.warning('get recursion root 13 stat error:'+str(e))
+
+	return '' 
 
 
 # '2' '54' json_str_data
@@ -93,7 +341,7 @@ def upload_data(subsysid, intfid, json_data):
 			encryptMode     = conf['security']['encrypt_mode']
 			compressMode    = conf['security']['compress_mode']
 			
-			url                 = 'https://'+conf['upload']['ip']+':'+conf['upload']['port']+'/'+intfid+'/'+conf['server']['orgid']
+			url                 = 'https://'+conf['upload']['ip']+':'+conf['upload']['port']+'/'+intfid+'/'+conf['server']['org_id']
 			randVal             = bytes(''.join(random.sample(string.ascii_letters, 20)), 'utf-8')
 			user_pwd            = bytes(conf['security']['user_pwd'], 'utf-8')
 			data_pwd            = bytes(conf['security']['data_pwd'], 'utf-8')
@@ -145,7 +393,7 @@ def upload_data(subsysid, intfid, json_data):
 			
 			requestData = {
 				'uuid'          : str(uuid.uuid4()),
-				'orgId'         : conf['server']['orgid'],
+				'orgId'         : conf['server']['org_id'],
 				'subsysId'      : subsysid,
 				'intfId'        : intfid,
 				'intfVer'       : commandVersion,
@@ -168,13 +416,13 @@ def upload_data(subsysid, intfid, json_data):
 				logger.info('upload recursion iter data success!!')
 				break
 			else:
-				logger.warning('upload recursion iter data failed : {}'.ret.text)
+				logger.warning('upload recursion iter data failed : {}'.format(ret.text))
 				sleep(5)
 				continue
 
 		except Exception as e:
-			print(e)
-			logger.warning(e)
+			print('catch a exception: {}'.format(e))
+			logger.warning('catch a exception: {}'.format(e))
 			sleep(5)
 			continue
 
@@ -182,16 +430,17 @@ def upload_data(subsysid, intfid, json_data):
 
 def upload_task():
 	while True:
-		time.sleep(1)
+		# int(share_delay.value) 根据周期统计
+		# sleep(conf['upload']['delay'])
+		sleep(2)
 		print(111111)
 		logger.info(111111)
 		# get_data()
-		# upload_data
 		upload_data('2', '54', '{1:1,2:2}')
 
 
-#with daemon.DaemonContext():
 if __name__ == '__main__':
+#with daemon.DaemonContext():
 
 	logger.info('main process start at: %s' % time.ctime())
 
