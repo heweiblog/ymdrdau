@@ -3,7 +3,7 @@
 
 from configparser import ConfigParser
 import time, logging, logging.handlers, json, requests, subprocess, urllib3
-import multiprocessing, random, string, uuid, base64, hashlib, zlib
+import multiprocessing, random, string, uuid, base64, hashlib, zlib, dns, dns.resolver
 from Crypto.Cipher import AES
 from time import sleep
 from iscpy.iscpy_dns.named_importer_lib import *
@@ -58,7 +58,7 @@ try:
 	logger.setLevel(level = logging.INFO)
 	handler = logging.FileHandler(conf['log']['path'])
 	handler.setLevel(logging.INFO)
-	formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+	formatter = logging.Formatter('%(asctime)s|%(lineno)d|%(levelname)s|%(message)s')
 	handler.setFormatter(formatter)
 	logger.addHandler(handler)
 
@@ -161,7 +161,7 @@ def get_recursion_iter_data():
 
 	root_request_stat = {'a':0, 'b':0, 'c':0, 'd':0, 'e':0, 'f':0, 'g':0, 'h':0, 'i':0, 'j':0, 'k':0, 'l':0, 'm':0, 'root_copy':0}
 	delay_stat = root_request_stat.copy()
-	root_reaponse_stat = root_request_stat.copy()
+	root_response_stat = root_request_stat.copy()
 
 	try:
 		with open(target_file,'w') as f:
@@ -202,8 +202,7 @@ def get_recursion_iter_data():
 				
 		dns_query = dns.message.make_query('.', 'NS')
 		for k in root_list:
-			#if root_stat[k] > 0 and len(root_list[k]) > 0: 
-			if True:
+			if root_response_stat[k] > 0 and len(root_list[k]) > 0: 
 				try:
 					begin = datetime.datetime.now()
 					response = dns.query.udp(dns_query, root_list[k][0], port = 53,timeout = 2)
@@ -326,6 +325,13 @@ def get_recursion_iter_data():
 			'timeStamp':time.strftime('%Y-%m-%dT%H:%M:%SZ')
 		}
 
+		data = json.dumps(iter_data,ensure_ascii=False,indent=4)
+		print(data)
+		logger.info(data)
+
+		#return json.dumps(iter_data)
+		return data
+
 	except Exception as e:
 		logger.warning('get recursion root 13 stat error:'+str(e))
 
@@ -408,7 +414,11 @@ def upload_data(subsysid, intfid, json_data):
 				'dataHash'      : dataHash.decode()
 			}
 
-			print(requestData)
+			#print(requestData)
+			data = json.dumps(requestData,ensure_ascii=False,indent=4)
+			print(data)
+			#logger.info(requestData)
+			logger.info(data)
             
 			ret = requests.post(url, json.dumps(requestData), verify=False)
 			retData = json.loads(ret.text)
@@ -434,13 +444,12 @@ def upload_task():
 		# sleep(conf['upload']['delay'])
 		sleep(2)
 		print(111111)
-		logger.info(111111)
-		# get_data()
-		upload_data('2', '54', '{1:1,2:2}')
+		data = get_recursion_iter_data()
+		upload_data('2', '54', data)
 
 
-if __name__ == '__main__':
-#with daemon.DaemonContext():
+#if __name__ == '__main__':
+with daemon.DaemonContext():
 
 	logger.info('main process start at: %s' % time.ctime())
 
