@@ -109,6 +109,34 @@ def get_root_copy_list():
 	return []
 
 
+def get_delay(data):
+	request,respond = {},{}
+	try:
+		for s in data:
+			l = s.split(' ')
+			if '->' in l:
+				k = l[3]+l[5]+l[-1]
+				request[k] = int(1000*float(l[1].split(':')[-1]))
+			elif '<-' in l:
+				k = l[3]+l[5]+l[-1]
+				respond[k] = int(1000*float(l[1].split(':')[-1]))
+	
+		total,count,avg_delay = 0,0,0
+		for k in respond:
+			if k in request:
+				delay = respond[k] - request[k]
+				if delay < 0:
+					delay = 60000 - request[k] + respond[k]
+				count += 1
+				total += delay
+		if count != 0:
+			avg_delay = total//count
+		return avg_delay
+	except Exception as e:
+		logger.error('get recursion iter delay error'+str(e))
+	return 0
+
+
 def get_recursion_iter_data():
 	dnstap_file = conf['named']['dnstap_file']
 	target_file = '/tmp/root_zone.txt'
@@ -158,11 +186,7 @@ def get_recursion_iter_data():
 		'l': ['199.7.83.42','2001:500:9f::42'],
 		'root_copy': root_copy_list
 	}
-
-	root_request_stat = {'a':0, 'b':0, 'c':0, 'd':0, 'e':0, 'f':0, 'g':0, 'h':0, 'i':0, 'j':0, 'k':0, 'l':0, 'm':0, 'root_copy':0}
-	delay_stat = root_request_stat.copy()
-	root_response_stat = root_request_stat.copy()
-
+	
 	try:
 		with open(target_file,'w') as f:
 			subprocess.check_call(['dnstap-read',dnstap_file],stdout=f, cwd = '.')
@@ -170,7 +194,14 @@ def get_recursion_iter_data():
 		logger.error('get recursion stat dnstap-read error:'+str(e))
 		return '' 
 
-	root_request,root_response = {},{}
+	request_tld = {'com':0, 'net':0, 'org':0, 'cn':0}
+	response_tld = request_tld.copy()
+	root_request_stat = {'a':0, 'b':0, 'c':0, 'd':0, 'e':0, 'f':0, 'g':0, 'h':0, 'i':0, 'j':0, 'k':0, 'l':0, 'm':0, 'root_copy':0}
+	delay_stat = root_request_stat.copy()
+	root_response_stat = root_request_stat.copy()
+
+	root_request,root_response,tld_data = {},{},{}
+	a,b,c,d,e,f,g,h,i,j,k,l,m,com,net,org,cn = [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]
 
 	try:
 		with open(target_file,'r') as f:
@@ -185,6 +216,15 @@ def get_recursion_iter_data():
 								root_request[domain] += 1
 							else:
 								root_request[domain] = 1
+						dname = l[-1].split('/')[0].split('.')
+						if len(dname) > 1 and dname[-1].islower():
+							if dname[-1] in request_tld:
+								request_tld[dname[-1]] += 1
+								if dname[-1] in tld_data:
+									tld_data[dname[-1]].append(s)
+								else:
+									tld_data[dname[-1]] = []
+									tld_data[dname[-1]].append(s)
 					elif '<-' in l:
 						domain = l[5].split(':53')[0]
 						if domain in root_ip_list:
@@ -192,7 +232,16 @@ def get_recursion_iter_data():
 								root_response[domain] += 1
 							else:
 								root_response[domain] = 1
-
+						dname = l[-1].split('/')[0].split('.')
+						if len(dname) > 1 and dname[-1].islower():
+							if dname[-1] in response_tld:
+								response_tld[dname[-1]] += 1
+								if dname[-1] in tld_data:
+									tld_data[dname[-1]].append(s)
+								else:
+									tld_data[dname[-1]] = []
+									tld_data[dname[-1]].append(s)
+									
 		for k in root_list:
 			for ip in root_list[k]:
 				if ip in root_request:
@@ -298,39 +347,37 @@ def get_recursion_iter_data():
 			'tldList':[
 				{
 					'tldName':'com',
-					'queryCnt':'123',
-					'sucRespCnt':'122',
-					'resolveAvgT':'66'
+					'queryCnt':str(request_tld['com']),
+					'sucRespCnt':str(response_tld['com']),
+					'resolveAvgT':str(get_delay(tld_data['com'])) if 'com' in tld_data else '0'
 				},
 				{
 					'tldName':'net',
-					'queryCnt':'123',
-					'sucRespCnt':'122',
-					'resolveAvgT':'66'
+					'queryCnt':str(request_tld['net']),
+					'sucRespCnt':str(response_tld['net']),
+					'resolveAvgT':str(get_delay(tld_data['net'])) if 'net' in tld_data else '0'
 				},
 				{
 					'tldName':'org',
-					'queryCnt':'123',
-					'sucRespCnt':'122',
-					'resolveAvgT':'66'
+					'queryCnt':str(request_tld['org']),
+					'sucRespCnt':str(response_tld['org']),
+					'resolveAvgT':str(get_delay(tld_data['org'])) if 'org' in tld_data else '0'
 				},
 				{
 					'tldName':'cn',
-					'queryCnt':'123',
-					'sucRespCnt':'122',
-					'resolveAvgT':'66'
+					'queryCnt':str(request_tld['cn']),
+					'sucRespCnt':str(response_tld['cn']),
+					'resolveAvgT':str(get_delay(tld_data['cn'])) if 'cn' in tld_data else '0'
 				}
 			],
 			'statPeriod':'300',
 			'timeStamp':time.strftime('%Y-%m-%dT%H:%M:%SZ')
 		}
 
-		data = json.dumps(iter_data,ensure_ascii=False,indent=4)
-		print(data)
-		logger.info(data)
+		print(json.dumps(iter_data,ensure_ascii=False,indent=4))
+		logger.info(json.dumps(iter_data,ensure_ascii=False,indent=4))
 
-		#return json.dumps(iter_data)
-		return data
+		return json.dumps(iter_data)
 
 	except Exception as e:
 		logger.warning('get recursion root 13 stat error:'+str(e))
@@ -414,11 +461,8 @@ def upload_data(subsysid, intfid, json_data):
 				'dataHash'      : dataHash.decode()
 			}
 
-			#print(requestData)
-			data = json.dumps(requestData,ensure_ascii=False,indent=4)
-			print(data)
-			#logger.info(requestData)
-			logger.info(data)
+			print(json.dumps(requestData,ensure_ascii=False,indent=4))
+			logger.info(json.dumps(requestData,ensure_ascii=False,indent=4))
             
 			ret = requests.post(url, json.dumps(requestData), verify=False)
 			retData = json.loads(ret.text)
@@ -448,8 +492,8 @@ def upload_task():
 		upload_data('2', '54', data)
 
 
-#if __name__ == '__main__':
-with daemon.DaemonContext():
+if __name__ == '__main__':
+#with daemon.DaemonContext():
 
 	logger.info('main process start at: %s' % time.ctime())
 

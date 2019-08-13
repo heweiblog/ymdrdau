@@ -1,0 +1,661 @@
+2019-08-13 11:03:56,247|454|INFO|main process start at: Tue Aug 13 11:03:56 2019
+2019-08-13 11:04:02,762|330|INFO|
+{
+    "nodeId": "03211101",
+    "rootList": [
+        {
+            "ns": "a.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "b.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "c.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "d.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "e.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "f.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "g.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "h.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "i.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "j.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "k.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "l.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "m.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        }
+    ],
+    "rcopyRCnt": "0",
+    "rcopyRAvgT": "0",
+    "tldList": [
+        {
+            "tldName": "com",
+            "queryCnt": "123",
+            "sucRespCnt": "122",
+            "resolveAvgT": "66"
+        },
+        {
+            "tldName": "net",
+            "queryCnt": "123",
+            "sucRespCnt": "122",
+            "resolveAvgT": "66"
+        },
+        {
+            "tldName": "org",
+            "queryCnt": "123",
+            "sucRespCnt": "122",
+            "resolveAvgT": "66"
+        },
+        {
+            "tldName": "cn",
+            "queryCnt": "123",
+            "sucRespCnt": "122",
+            "resolveAvgT": "66"
+        }
+    ],
+    "statPeriod": "300",
+    "timeStamp": "2019-08-13T11:04:02Z"
+}
+2019-08-13 11:04:02,764|421|INFO|
+{
+    "uuid": "527a2a3e-1014-4c3b-bcbb-ad86c337a580",
+    "orgId": "4",
+    "subsysId": "2",
+    "intfId": "54",
+    "intfVer": "v0.1",
+    "timeStamp": "2019-08-13T11:04:02Z",
+    "randVal": "mbnvADEJifuZqdoRxlYG",
+    "pwdHash": "NWZhYjI2NWE2ZDg1OGNlZjQzOGJhYjA0YTdjNDE4NjhmZGY1NjU5NjY0NjdiYzBiMzNjOWNiZWUyYzI5MWE4MA==",
+    "encryptMode": "1",
+    "hashMode": "3",
+    "compressMode": "1",
+    "dataTag": "0",
+    "data": "JB54JWhzFp0L/CnsHRRr208xLK0E9TSz7T3ZPMxVafqElJn50j2P01ioUBezjWsX9G+s7cQPo0tpCpQoWMLerEpAaiHRJODqM0p+z4yIlAsiHcM4w8u4ri7AdBrnRuiGCNpdZXSrvEXZFvBqtlBZjUQjpkIsZ5VJ64TDPRYfPAgKhaV2w2jQN4s/D4GXzQJtWXuUREldFr+qLEe1rsP6Ajr+sdeCrCJqCZ8y+zqIPdmszU1HRgstJ7PndY2Q9iTFRtINAB0fL7LVDgg0aZCOsyPyLEh8qNw+RaGejI3ctA1gT2AyDJ10j+OYKFk2uvXheASO/4r/All6Xt5X2giS6VLbLvJ72mioONb+V5IGA+c29LejYL9nEN3i2oEitEyn",
+    "dataHash": "ZjRjYjYxNTRkNzAwNGRiODg2NzFhZTRhYTdmMzMyYmQ3MGM3NGQwMDE3YTYxYmU5ODAyNjExN2U5N2YyMWUzNw=="
+}
+2019-08-13 11:04:02,799|429|WARNING|upload recursion iter data failed : {"errorCode": "2", "errorMsg": "Certification error", "timeStamp": "2019-08-13T11:01:30Z"}
+2019-08-13 11:27:36,589|459|INFO|main process start at: Tue Aug 13 11:27:36 2019
+2019-08-13 11:27:43,135|339|INFO|{'nodeId': '03211101', 'rootList': [{'ns': 'a.root-servers.net', 'queryCnt': '0', 'sucRespCnt': '0', 'resolveAvgT': '0'}, {'ns': 'b.root-servers.net', 'queryCnt': '0', 'sucRespCnt': '0', 'resolveAvgT': '0'}, {'ns': 'c.root-servers.net', 'queryCnt': '0', 'sucRespCnt': '0', 'resolveAvgT': '0'}, {'ns': 'd.root-servers.net', 'queryCnt': '0', 'sucRespCnt': '0', 'resolveAvgT': '0'}, {'ns': 'e.root-servers.net', 'queryCnt': '0', 'sucRespCnt': '0', 'resolveAvgT': '0'}, {'ns': 'f.root-servers.net', 'queryCnt': '0', 'sucRespCnt': '0', 'resolveAvgT': '0'}, {'ns': 'g.root-servers.net', 'queryCnt': '0', 'sucRespCnt': '0', 'resolveAvgT': '0'}, {'ns': 'h.root-servers.net', 'queryCnt': '0', 'sucRespCnt': '0', 'resolveAvgT': '0'}, {'ns': 'i.root-servers.net', 'queryCnt': '0', 'sucRespCnt': '0', 'resolveAvgT': '0'}, {'ns': 'j.root-servers.net', 'queryCnt': '0', 'sucRespCnt': '0', 'resolveAvgT': '0'}, {'ns': 'k.root-servers.net', 'queryCnt': '0', 'sucRespCnt': '0', 'resolveAvgT': '0'}, {'ns': 'l.root-servers.net', 'queryCnt': '0', 'sucRespCnt': '0', 'resolveAvgT': '0'}, {'ns': 'm.root-servers.net', 'queryCnt': '0', 'sucRespCnt': '0', 'resolveAvgT': '0'}], 'rcopyRCnt': '0', 'rcopyRAvgT': '0', 'tldList': [{'tldName': 'com', 'queryCnt': '471', 'sucRespCnt': '459', 'resolveAvgT': '66'}, {'tldName': 'net', 'queryCnt': '52', 'sucRespCnt': '39', 'resolveAvgT': '66'}, {'tldName': 'org', 'queryCnt': '22', 'sucRespCnt': '21', 'resolveAvgT': '66'}, {'tldName': 'cn', 'queryCnt': '23', 'sucRespCnt': '22', 'resolveAvgT': '66'}], 'statPeriod': '300', 'timeStamp': '2019-08-13T11:27:43Z'}
+2019-08-13 11:27:43,137|426|INFO|{'uuid': '79ab39a9-a2bd-4ef2-ab20-bb829d00d201', 'orgId': '4', 'subsysId': '2', 'intfId': '54', 'intfVer': 'v0.1', 'timeStamp': '2019-08-13T11:27:43Z', 'randVal': 'lhkMUFwnjsVvKmuLJxYb', 'pwdHash': 'MTEyMzBkZDI4ODM5ZGE1NWU1NWY4NWU0MTNjMWI5ZGY4ODc3M2MyNDU3MjNmYjVkMmNlOTkxZDg4ZGM1YWEwNw==', 'encryptMode': '1', 'hashMode': '3', 'compressMode': '1', 'dataTag': '0', 'data': 'USSbUseuxkKNYH/JP7Wk6MS64FBn0+Fl5FDwoqNdYbDcXPjiv4OWv6zjCuajvvLw0RvsW+ra73R7K/6czs9OLpjbI7PTuozUggTTouH29BJnEK7Q0WxdDGzb8MT5BJ8MxIwmQnn4wx7xj8qMrOeIin/cpcGH66qxfCTT2iIs9q9xn1aFo5WKy4eTX49JzimHMMBZ8F8Zf7uL3e7Q3VwB6bmj00BKYPTbJsMkkcZKUR/YOG+OKPdRn+9MK+0Mb9a1JZUGWYtX4pIwZbVCVP6k+mgouQRzM1KroK9xRGVUKInbHrTyrfUQFagcvfw+ksdTyRDKE+790EK6tP052WgyPeAnQDAPTz6+MVrPmdvYl1A=', 'dataHash': 'NzRlOGI3OGVkYTk1Y2Y5MzkyNWQ1MDBmYTgyMGViMmRmODMyYmUxNjJhNmYyODRkNzIxOTk2OTI5YmVkZjg4Yw=='}
+2019-08-13 11:27:43,172|434|WARNING|upload recursion iter data failed : {"errorCode": "2", "errorMsg": "Certification error", "timeStamp": "2019-08-13T11:25:11Z"}
+2019-08-13 11:29:21,538|459|INFO|main process start at: Tue Aug 13 11:29:21 2019
+2019-08-13 11:29:27,986|339|INFO|{
+    "nodeId": "03211101",
+    "rootList": [
+        {
+            "ns": "a.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "b.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "c.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "d.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "e.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "f.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "g.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "h.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "i.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "j.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "k.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "l.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "m.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        }
+    ],
+    "rcopyRCnt": "0",
+    "rcopyRAvgT": "0",
+    "tldList": [
+        {
+            "tldName": "com",
+            "queryCnt": "471",
+            "sucRespCnt": "459",
+            "resolveAvgT": "66"
+        },
+        {
+            "tldName": "net",
+            "queryCnt": "52",
+            "sucRespCnt": "39",
+            "resolveAvgT": "66"
+        },
+        {
+            "tldName": "org",
+            "queryCnt": "22",
+            "sucRespCnt": "21",
+            "resolveAvgT": "66"
+        },
+        {
+            "tldName": "cn",
+            "queryCnt": "23",
+            "sucRespCnt": "22",
+            "resolveAvgT": "66"
+        }
+    ],
+    "statPeriod": "300",
+    "timeStamp": "2019-08-13T11:29:27Z"
+}
+2019-08-13 11:29:27,987|426|INFO|{
+    "uuid": "0595f432-4d59-490e-80c1-a851000e265b",
+    "orgId": "4",
+    "subsysId": "2",
+    "intfId": "54",
+    "intfVer": "v0.1",
+    "timeStamp": "2019-08-13T11:29:27Z",
+    "randVal": "iwYfxknsheUElarZLPJb",
+    "pwdHash": "MGMzNDI2YmE2MTM0N2FlM2FkMzIyODE2Zjc3Mzg4MTc0NGMzYTA5YjM1YjMzYjMwMmJkOTk5NGY2NWU1MDY3Nw==",
+    "encryptMode": "1",
+    "hashMode": "3",
+    "compressMode": "1",
+    "dataTag": "0",
+    "data": "mCLF5OIyCpQgHUTrHkxe95rWnwtYYO+P+/Hy5recDm94bN0l7NY0sCIRhHGLd5fhn0BL8SLLUNt8WzjSr2DFpN8dtvB3d4PbbL/J3mHnP3jropdqh2Nv6/sy9NErbj/srj9Uc9zLteTeByrb/Pfx7sEGzUSIKIXnan1SHSUVTp9WVsqSSiM2g12Xos+4yKMnzUUgW8LYtMUmr1XCL+4XXEu43cc3mUkTgHTcwutFwXYOq+0Gvt8LiEqfXrgNi2dsfQMGAorLPMYHlW0CXanIS0ZI/Plva6tFxZs9SbU2HyuFr1GKNTBKDmflbrCmbPzPmDxUTnLizKFwnevc7dZ2nnMJ7ZgTuy4Y6OXgKkY+M1E=",
+    "dataHash": "ODhmNTBkMzJlNGU5M2JmZTAwYzAwMzZhODgyN2IxN2JiMzRkNmVhODFkNjBiNDg2NjI2YjI5NDY3ZDQ5Mjg5ZA=="
+}
+2019-08-13 11:29:28,022|434|WARNING|upload recursion iter data failed : {"errorCode": "2", "errorMsg": "Certification error", "timeStamp": "2019-08-13T11:26:55Z"}
+2019-08-13 11:57:21,021|467|INFO|main process start at: Tue Aug 13 11:57:21 2019
+2019-08-13 11:57:27,464|347|INFO|{
+    "nodeId": "03211101",
+    "rootList": [
+        {
+            "ns": "a.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "b.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "c.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "d.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "e.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "f.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "g.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "h.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "i.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "j.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "k.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "l.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "m.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        }
+    ],
+    "rcopyRCnt": "0",
+    "rcopyRAvgT": "0",
+    "tldList": [
+        {
+            "tldName": "com",
+            "queryCnt": "471",
+            "sucRespCnt": "459",
+            "resolveAvgT": "66"
+        },
+        {
+            "tldName": "net",
+            "queryCnt": "52",
+            "sucRespCnt": "39",
+            "resolveAvgT": "66"
+        },
+        {
+            "tldName": "org",
+            "queryCnt": "22",
+            "sucRespCnt": "21",
+            "resolveAvgT": "66"
+        },
+        {
+            "tldName": "cn",
+            "queryCnt": "23",
+            "sucRespCnt": "22",
+            "resolveAvgT": "66"
+        }
+    ],
+    "statPeriod": "300",
+    "timeStamp": "2019-08-13T11:57:27Z"
+}
+2019-08-13 11:57:27,465|434|INFO|{
+    "uuid": "82424889-40cd-4f7f-bdf6-2c59667d4cca",
+    "orgId": "4",
+    "subsysId": "2",
+    "intfId": "54",
+    "intfVer": "v0.1",
+    "timeStamp": "2019-08-13T11:57:27Z",
+    "randVal": "ZpwqhNxbDFysMdTCgvne",
+    "pwdHash": "MWZlYzA1MDliMDgwNzM2YjljZjliMTFmZTk0NjFjNzg4ZjllM2QyZmQ3NTI2NmIwYmYwZWRjYTBjZjQ1ZTkxZg==",
+    "encryptMode": "1",
+    "hashMode": "3",
+    "compressMode": "1",
+    "dataTag": "0",
+    "data": "USSbUseuxkKNYH/JP7Wk6JRsKVIVGA/bYl1xIfnMC7YZomzKV4XeM3PBEPo3uTIiavkU6Yf1TBTj0tg+0Z5kbiaxlViTGPgMpz0IELhydx8gTuCViEGb8dQvPyrTVkWkWLec7kyRuad1VRYjeUVutRmQ9sz9L0TJioJkf5En8jWy6jsrqaqCIyRZfD7+DZCuEc7cOSs1cEKpsUqImf8WF3WgAbz47ATghxIQo6tlBU9Dij1CyTYZOCM1yKy/GH+vUWLcAZM5ALFrIidZlMAa/Hx0KnvaW8nXis9mF6vHr4PII+acTysYn2m6XaQbjJ1/Ef/2tAqpLvoPyzN0nXSmdU9loTea/51qZMXxvlgfgS8=",
+    "dataHash": "NTNjYTgyNzBjZDMyYjNhOGI0OTc0YmExYzVkNTkyYmI2MGQ3ZDFmYWI5Y2JjNWYxMmI3M2I5MDEyYTQ3NTUzMg=="
+}
+2019-08-13 11:57:27,474|448|WARNING|catch a exception: HTTPSConnectionPool(host='192.168.6.189', port=8630): Max retries exceeded with url: /54/4 (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x7fb0a88cc320>: Failed to establish a new connection: [Errno 111] Connection refused',))
+2019-08-13 11:58:15,607|467|INFO|main process start at: Tue Aug 13 11:58:15 2019
+2019-08-13 11:58:22,217|347|INFO|{
+    "nodeId": "03211101",
+    "rootList": [
+        {
+            "ns": "a.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "b.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "c.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "d.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "e.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "f.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "g.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "h.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "i.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "j.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "k.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "l.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "m.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        }
+    ],
+    "rcopyRCnt": "0",
+    "rcopyRAvgT": "0",
+    "tldList": [
+        {
+            "tldName": "com",
+            "queryCnt": "471",
+            "sucRespCnt": "459",
+            "resolveAvgT": "66"
+        },
+        {
+            "tldName": "net",
+            "queryCnt": "52",
+            "sucRespCnt": "39",
+            "resolveAvgT": "66"
+        },
+        {
+            "tldName": "org",
+            "queryCnt": "22",
+            "sucRespCnt": "21",
+            "resolveAvgT": "66"
+        },
+        {
+            "tldName": "cn",
+            "queryCnt": "23",
+            "sucRespCnt": "22",
+            "resolveAvgT": "66"
+        }
+    ],
+    "statPeriod": "300",
+    "timeStamp": "2019-08-13T11:58:22Z"
+}
+2019-08-13 11:58:22,219|434|INFO|{
+    "uuid": "b6dd5aca-31cd-47c5-b703-ca48f495b0bc",
+    "orgId": "4",
+    "subsysId": "2",
+    "intfId": "54",
+    "intfVer": "v0.1",
+    "timeStamp": "2019-08-13T11:58:22Z",
+    "randVal": "fmJcVMWywOEkKznjuxDL",
+    "pwdHash": "YzU2MTQzMzgwMWIxNGRmYTU1MmVmNDM3NzI0ZTAzNzljNWRiYzZhYWM0ZGY2MGQwOTVkMWFhNmYzMDExMzY1ZQ==",
+    "encryptMode": "1",
+    "hashMode": "3",
+    "compressMode": "1",
+    "dataTag": "0",
+    "data": "USSbUseuxkKNYH/JP7Wk6JCagm3D5Cil84I5yfN50C1hdf+bDLx7wumoloYaDSmc4t4aONrS0spgi560ik3Vs8ztNS3h3BvNQr+rLWCVMOvsR9zdxbJ2TnWVYHK503JMJtcFsHPk/7JMECDBpFTmff8PoyGcVwIQCpVtnSN3WemL6RRKfar2yIKCXQZFCItIpKCnqFxyVxjGkSJ6lTruCboa6YZF7Lxgie06N+rGVlxvtnQiw6go7DlcReZ9hFzdhSQTQKGe4EFKDUhbRITdr3q+eSSB6gxEDuFQ7I0M2nFKEfqqftGtrzRryHADwwYg4mFv1U/hNudg/cmXAexpNaYdxc55h+iYIWqYobRkNII=",
+    "dataHash": "Yjg4ODRkNDc1YWM1N2ViY2Y5YTYyOTliYWVjM2U5MDBhNzA5NThmNjI2M2ZmNDVkNWQxOTVkMWQ1YTE1ODFlZg=="
+}
+2019-08-13 11:58:22,228|448|WARNING|catch a exception: HTTPSConnectionPool(host='192.168.6.189', port=8630): Max retries exceeded with url: /54/4 (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x7fe0ab90f2b0>: Failed to establish a new connection: [Errno 111] Connection refused',))
+2019-08-13 12:13:03,879|498|INFO|main process start at: Tue Aug 13 12:13:03 2019
+2019-08-13 12:13:10,368|378|INFO|{
+    "nodeId": "03211101",
+    "rootList": [
+        {
+            "ns": "a.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "b.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "c.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "d.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "e.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "f.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "g.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "h.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "i.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "j.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "k.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "l.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        },
+        {
+            "ns": "m.root-servers.net",
+            "queryCnt": "0",
+            "sucRespCnt": "0",
+            "resolveAvgT": "0"
+        }
+    ],
+    "rcopyRCnt": "0",
+    "rcopyRAvgT": "0",
+    "tldList": [
+        {
+            "tldName": "com",
+            "queryCnt": "471",
+            "sucRespCnt": "459",
+            "resolveAvgT": "25"
+        },
+        {
+            "tldName": "net",
+            "queryCnt": "52",
+            "sucRespCnt": "39",
+            "resolveAvgT": "214"
+        },
+        {
+            "tldName": "org",
+            "queryCnt": "22",
+            "sucRespCnt": "21",
+            "resolveAvgT": "355"
+        },
+        {
+            "tldName": "cn",
+            "queryCnt": "23",
+            "sucRespCnt": "22",
+            "resolveAvgT": "26"
+        }
+    ],
+    "statPeriod": "300",
+    "timeStamp": "2019-08-13T12:13:10Z"
+}
+2019-08-13 12:13:10,370|465|INFO|{
+    "uuid": "4c5781e0-2320-4c42-a7ff-15f28f2ec134",
+    "orgId": "4",
+    "subsysId": "2",
+    "intfId": "54",
+    "intfVer": "v0.1",
+    "timeStamp": "2019-08-13T12:13:10Z",
+    "randVal": "pKaFeQhxZmgLVzHNjsdS",
+    "pwdHash": "OTUyM2QwYWRiOWVlNjM5ZjIyNDIwNjE2MjgwMmZiY2Y4ZWMzOTM2ODI0Y2RhOWEwYjY0ZmRjYTgxYzIyZDc3Yw==",
+    "encryptMode": "1",
+    "hashMode": "3",
+    "compressMode": "1",
+    "dataTag": "0",
+    "data": "11JqfKuNDX287pcNZc7byl3x4FUQk9W5XdUTTQ28gd4F2stPuuPYw952owUiAk87LBCnDx29w5eLRdBX4sZSrcMifIDwCZR6XaSI8XpKjSHvPA/XhcTl1WlLHhA7Ym2hRhEgN4wnrKUwqpX+N60lMWtJnSGCuW85C3eVvWFr36PO4sA06MUNfmlwNDZTtISiec3kq9/D0pnKlMtS01Is/uS4q7K159zOKXYv3BgnXghEu04Nyn+yVv2ooGZqeU7CfqLp0wUoCWaip6Xi7I5X61/gPOvxBbhxrfBp9dFQM4LB8jX4VDbyjG8EZiMUQKZcCXB9PQgS0ZOALsSJMCLdkABhIHC9xC6xXM9bdpt1RV4=",
+    "dataHash": "YTEwNzhlZmE2NzI4MjUyMjI2MGZhYWQ0ODk3MTZlY2Q4Mzc1Yjc4ZTczN2YyMTAzN2E1ZGJkYmMyZWIxYWUwMA=="
+}
+2019-08-13 12:13:10,380|479|WARNING|catch a exception: HTTPSConnectionPool(host='192.168.6.189', port=8630): Max retries exceeded with url: /54/4 (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x7f11b9d4c588>: Failed to establish a new connection: [Errno 111] Connection refused',))
